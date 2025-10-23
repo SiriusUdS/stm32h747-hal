@@ -17,10 +17,16 @@
 
 ## About
 
-This repository contains all the code that is specific for the STM32H747 chip at the HAL.
+This repository contains all the code that is specific for the STM32H747 chip at the HAL.  
+The following README sections need to be updated when we will have the information to update them:
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Installation / Build](#installation--build)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
 
 ---
-
 ## Project Structure
 project-root/  
 │  
