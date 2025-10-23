@@ -1,17 +1,6 @@
-# template
-Template repository. Repository name format: &lt;stm[model]|py|desktop>-&lt;project_name>-&lt;layer>  
+# STM32H747 HAL
 
-Example:
-- stmf411-engine-hal
-- stm-engine-components
-
-For the README.md file, it should be structured like the following:
-
----
-
-# Project Name
-
-> One-sentence summary describing what your project does or solves.
+> Hardware abstraction layer implementation of the STM32H747.
 
 ---
 
@@ -28,10 +17,7 @@ For the README.md file, it should be structured like the following:
 
 ## About
 
-Explain what the project is, what problem it solves, and any relevant context.
-
-Example:  
-> This project implements the HAL layer of the engine project on the STMF411...
+This repository contains all the code that is specific for the STM32H747 chip at the HAL.
 
 ---
 
