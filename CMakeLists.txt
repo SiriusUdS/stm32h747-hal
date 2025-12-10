@@ -1,29 +1,9 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.23)
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR arm)
-set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+project(H7_COMMON C)
 
-project(H7_COMMON)
-
-add_library(${PROJECT_NAME} INTERFACE)
-
-target_include_directories(${PROJECT_NAME} INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
-    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
-    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Include
-
-)
-
-target_compile_definitions( ${PROJECT_NAME} INTERFACE
-    	USE_HAL_DRIVER 
-	STM32H7xx
-    $<$<CONFIG:Debug>:DEBUG>
-)
-
-target_sources( ${PROJECT_NAME} PUBLIC
-
+# Créer une bibliothèque STATIC au lieu de INTERFACE
+add_library(${PROJECT_NAME} STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
@@ -43,3 +23,17 @@ target_sources( ${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.c
 )
 
+# CRITICAL: Utiliser PUBLIC pour propager les includes
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Include
+)
+
+# Utiliser PUBLIC pour propager les defines
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+    USE_HAL_DRIVER 
+    STM32H7xx
+    $<$<CONFIG:Debug>:DEBUG>
+)
